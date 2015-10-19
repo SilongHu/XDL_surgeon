@@ -10,3 +10,7 @@ Using command './XDL_Instance <XDl file> <Inst_Type> <Old_loc> <New_loc>' to mov
 
 
 If you want to generate the executable file, you should put these c++ file into the TORC environment and follow its tutorial to use 'make' to generate the executable file under LINUX.
+
+Remaining bugs:
+1. DSP & BRAM cascaded
+2. Carry-Chain overlap.
