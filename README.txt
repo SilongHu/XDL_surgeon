@@ -18,4 +18,4 @@ Remaining bugs:
 2. Carry-Chain overlap.
 3. Some specific TIEOFF sites I do not mention in my Module_Router.cpp(TIEOFF_X10Y0->DSP_R_X9Y0)
 4. In Module Level Router, When I input the X-10,Y-10, the program only executes the first step(X-10) and ignore the second step
-5. MLR just focus on Y-direction.
+5. MLR just focus on Y-direction and the CLB modification(Not tried DSP & BRAM yet).
