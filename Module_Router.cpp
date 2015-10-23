@@ -65,9 +65,10 @@ void TIEOFFMovementYplus(InstanceSharedPtr instancePtr, const Sites &sites, cons
 
 void TIEOFFMovementYminus(InstanceSharedPtr instancePtr, const Sites &sites, const Tiles &tiles, int D_Ty, int count,int Y_pos,int Y_Dpos,std::string siteName, std::string tileName,std::map<std::string,std::string>& TILE_MAP);
 
-void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &tiles,std::map<std::string,std::string>& TILE_MAP);
+void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &tiles,std::map<std::string,std::string>& TILE_MAP, std::set<std::string>& OtherTileLocation_SET);
 
-	std::map<std::string,std::string> TILE_MAP;	
+	std::map<std::string,std::string> TILE_MAP;
+	std::set<std::string> OtherTileLocation_SET;	
 //	std::map<std::string,std::string> m;
 // Main function starts here	
 int main(int argc, char* argv[]) {
@@ -442,14 +443,20 @@ if((siteType.compare("SLICEL")==0 || siteType.compare("SLICEM")==0 || siteType.c
 	}
 	
 	else
-	{std::cout<<"This is no SLCIEL or SLICEM!"<<std::endl;}
+	{
+	std::string subtile = tileName.substr(X_Dpos-1);
+	std::cout<<"subtile:  "<<subtile<<std::endl;
+	OtherTileLocation_SET.insert(subtile);
+	std::cout<<"This is no SLCIEL or SLICEM!"<<std::endl;
+
+	}
 	
 	pInstance++;	
 	}	
 
 
 
-	NetsProcessing(designPtr, sites, tiles,TILE_MAP);
+	NetsProcessing(designPtr, sites, tiles,TILE_MAP, OtherTileLocation_SET);
 	// export the XDL design
 	std::map<std::string,std::string>::iterator itt = TILE_MAP.begin();
 	
@@ -1292,10 +1299,11 @@ int Y_Dpos,std::string siteName, std::string tileName, std::map<std::string,std:
 	else{std::cout<<"TIEOFF can not find the identical CLB"<<std::endl;}
 }
 
-void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &tiles, std::map<std::string,std::string>& TILE_MAP){
+void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &tiles, std::map<std::string,std::string>& TILE_MAP, std::set<std::string>& OtherTileLocation_SET){
 	NetSharedPtrVector::const_iterator pNets = designPtr -> netsBegin();
 	NetSharedPtrVector::const_iterator eNets = designPtr -> netsEnd();	
 	std::map<std::string,std::string>::iterator it;
+	std::set<std::string> AddPIP_SET;
 	std::cout<<"Working on Nets... count: "<< designPtr->getNetCount() << std::endl;
 	std::map<std::string,std::string>::iterator itt = TILE_MAP.begin();
 	int X_T,Y_T,Tieoff_X;
@@ -1332,11 +1340,14 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}	
 		//std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
 		netPtr->addPip(*(&newpip));
+		AddPIP_SET.insert(it->second);
 		pPips--;
 			
 		}
 		else{
 		std::string subtieoff = tilename.substr(5);
+		std::string subother = tilename.substr(0,3);//INT
+		std::cout<<"subOther: "<<subother<<std::endl;
 		std::cout<<"sub: "<<subtieoff<<" tilename: "<<tilename<<std::endl;
 		std::string check1 = "CLBLM_R"; check1.append(subtieoff);
 		std::cout<<"check1: "<<check1<<std::endl;
@@ -1374,6 +1385,7 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}	
 		std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
 		netPtr->addPip(*(&newpip));
+		AddPIP_SET.insert(New_TIE);
 		pPips--;
 		
 		}
@@ -1402,6 +1414,7 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}	
 		std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
 		netPtr->addPip(*(&newpip));
+		AddPIP_SET.insert(New_TIE);
 		pPips--;
 		
 		}
@@ -1432,6 +1445,7 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}	
 		std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
 		netPtr->addPip(*(&newpip));
+		AddPIP_SET.insert(New_TIE);
 		pPips--;
 
 		}
@@ -1459,8 +1473,21 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}	
 		std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
 		netPtr->addPip(*(&newpip));
+		AddPIP_SET.insert(New_TIE);
 		pPips--;
 		}
+
+		else if(subother.compare("INT")==0 && TILE_MAP.find(check1)==TILE_MAP.end()&&TILE_MAP.find(check2)==TILE_MAP.end()&&TILE_MAP.find(check3)==TILE_MAP.end()&&TILE_MAP.find(check4)==TILE_MAP.end()&&AddPIP_SET.find(tilename)==AddPIP_SET.end()){
+		if (OtherTileLocation_SET.find(subtieoff)!=OtherTileLocation_SET.end()){
+		std::cout<<"This pip: "<<tilename<<" stay here"<<std::endl;
+		}
+		else{
+		if(netPtr->removePip(*pPips)){std::cout<<"delete pip: "<< tilename<<std::endl;}
+		pPips--;
+		}
+		}
+
+
 		else{std::cout<<"This is :"<<tilename<<", we do not need move!"<<std::endl;}
 		/*std::cout<<"This is: "<< tilename <<", we do not need move!"<<std::endl;*/
 	//	std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
