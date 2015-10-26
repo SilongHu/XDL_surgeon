@@ -1303,7 +1303,12 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 	NetSharedPtrVector::const_iterator pNets = designPtr -> netsBegin();
 	NetSharedPtrVector::const_iterator eNets = designPtr -> netsEnd();	
 	std::map<std::string,std::string>::iterator it;
+	//The new PIP set
 	std::set<std::string> AddPIP_SET;
+	//Other INT type set
+	std::set<std::string> OtherINT_SET;
+	//RIO type set, to check the same tile location in same net
+	std::set<std::string> RIO_SET;
 	std::cout<<"Working on Nets... count: "<< designPtr->getNetCount() << std::endl;
 	std::map<std::string,std::string>::iterator itt = TILE_MAP.begin();
 	int X_T,Y_T,Tieoff_X;
@@ -1312,6 +1317,7 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 	}
 	while(pNets != eNets){
 		NetSharedPtr netPtr = *pNets;
+		int mark;
 		std::cout<<" Net: "<<netPtr->getName() <<std::endl;
 //		std::cout<<"Net Type: "<<netPtr->getNetType() <<std::endl;	
 		//go over all the pips in the net
@@ -1478,28 +1484,53 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}
 
 		else if(subother.compare("INT")==0 && TILE_MAP.find(check1)==TILE_MAP.end()&&TILE_MAP.find(check2)==TILE_MAP.end()&&TILE_MAP.find(check3)==TILE_MAP.end()&&TILE_MAP.find(check4)==TILE_MAP.end()&&AddPIP_SET.find(tilename)==AddPIP_SET.end()){
-		if (OtherTileLocation_SET.find(subtieoff)!=OtherTileLocation_SET.end()){
-		std::cout<<"This pip: "<<tilename<<" stay here"<<std::endl;
+		if ( OtherTileLocation_SET.find(subtieoff)!=OtherTileLocation_SET.end()){
+		OtherINT_SET.insert(subtieoff);
+		std::cout<<"This pip: "<<tilename<<" stay here now"<<std::endl;
+		mark = 1;
 		}
 		else{
 		if(netPtr->removePip(*pPips)){std::cout<<"delete pip: "<< tilename<<std::endl;}
 		pPips--;
+			}
 		}
+		else if(subother.compare("RIO")==0){
+			X_T = tilename.find("X");
+			RIO_SET.insert(tilename.substr(X_T-1));
+			std::cout<<"part RIO: "<<tilename.substr(X_T-1)<<std::endl;
+			std::cout<<"This is RIO pip: "<<tilename<<std::endl;
 		}
 
 
 		else{std::cout<<"This is :"<<tilename<<", we do not need move!"<<std::endl;}
-		/*std::cout<<"This is: "<< tilename <<", we do not need move!"<<std::endl;*/
-	//	std::cout<<"Pips name:  "<< newpip.getTileName()<<std::endl;
-//		TileIndex tileIndex = tiles.findTileIndex(pPips->getTileName());
-//		const TileInfo& tileInfo = tiles.getTileInfo(tileIndex);
-//		std::cout<<tileInfo.getName()<<std::endl;
-		}
 
-			
+		}		
 	//	std::cout<<"Pips:  "<<route->getValue()<<std::endl;
 		pPips++;
 		}
+		//second iterator
+		if(mark==1){
+		mark = 0;
+		Net::PipConstIterator pPips2 = netPtr->pipsBegin();
+		Net::PipConstIterator ePips2 = netPtr->pipsEnd();	
+		while(pPips2 != ePips2){
+		TileName tilename = pPips2->getTileName();
+		std::string subtieoff = tilename.substr(5);//tile location
+			if(OtherINT_SET.find(subtieoff)!=OtherINT_SET.end()){
+				if (RIO_SET.find(subtieoff)!=RIO_SET.end()){
+					std::cout<<"This pip: "<<tilename<<" stay here forever"<<std::endl;
+					}
+				else{
+					if(netPtr->removePip(*pPips2)){std::cout<<"delete pip: "<< tilename<<std::endl;}
+					pPips2--;
+					}
+				}
+		pPips2++;
+		}
+		OtherINT_SET.clear();
+		RIO_SET.clear();
+		}
+		
 	pNets++;
 	}
 }		
