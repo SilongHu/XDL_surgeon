@@ -1366,16 +1366,17 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		std::string New_TIE;
 		if (TILE_MAP.find(check1)!=TILE_MAP.end()){
 		
-		X_T = check1.find("X");
-		Y_T = check1.find("Y");
-		Tieoff_X = atoi((check1.substr(X_T+1,Y_T - X_T-1)).c_str());
-
+	//	std::cout<<"the TIEoff X: "<<Tieoff_X<<std::endl;
+	//	exit(0);	
 		std::cout<<"we should delete: "<<tilename<<std::endl;
 		RoutethroughSharedPtr route = pPips -> getRoutethroughPtr();
 		WireName sourcename = pPips -> getSourceWireName();
 		WireName sinkname = pPips -> getSinkWireName();
 		New_CLB = TILE_MAP.find(check1)->second;
 		New_CLB = New_CLB.substr(7);
+		X_T = New_CLB.find("X");
+		Y_T = New_CLB.find("Y");
+		Tieoff_X = atoi((New_CLB.substr(X_T+1,Y_T - X_T-1)).c_str());
 		if(Tieoff_X % 2 == 0){
 		New_TIE = TIEOFF_L.append(New_CLB);
 		std::cout<<"the new tieoff is: "<<New_TIE<<std::endl;
@@ -1397,15 +1398,18 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		}
 		else if(TILE_MAP.find(check2)!=TILE_MAP.end()){
 
-		X_T = check2.find("X");
-		Y_T = check2.find("Y");
-		Tieoff_X = atoi((check2.substr(X_T+1,Y_T - X_T-1)).c_str());
+//		X_T = check2.find("X");
+//		Y_T = check2.find("Y");
+//		Tieoff_X = atoi((check2.substr(X_T+1,Y_T - X_T-1)).c_str());
 		std::cout<<"we should delete: "<<tilename<<std::endl;
 		RoutethroughSharedPtr route = pPips -> getRoutethroughPtr();
 		WireName sourcename = pPips -> getSourceWireName();
 		WireName sinkname = pPips -> getSinkWireName();
 		New_CLB = TILE_MAP.find(check2)->second;
 		New_CLB = New_CLB.substr(7);
+		X_T = New_CLB.find("X");
+		Y_T = New_CLB.find("Y");
+		Tieoff_X = atoi((New_CLB.substr(X_T+1,Y_T - X_T-1)).c_str());
 		if(Tieoff_X % 2 == 0){
 		New_TIE = TIEOFF_L.append(New_CLB);
 		std::cout<<"the new tieoff is: "<<New_TIE<<std::endl;
@@ -1427,14 +1431,17 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 
 		else if( TILE_MAP.find(check3)!=TILE_MAP.end()){
 		std::cout<<"we should delete: "<<tilename<<std::endl;
-		X_T = check3.find("X");
-		Y_T = check3.find("Y");
-		Tieoff_X = atoi((check3.substr(X_T+1,Y_T - X_T-1)).c_str());
+	//	X_T = check3.find("X");
+	//	Y_T = check3.find("Y");
+	//	Tieoff_X = atoi((check3.substr(X_T+1,Y_T - X_T-1)).c_str());
 		RoutethroughSharedPtr route = pPips -> getRoutethroughPtr();
 		WireName sourcename = pPips -> getSourceWireName();
 		WireName sinkname = pPips -> getSinkWireName();
 		New_CLB = TILE_MAP.find(check3)->second;
 		New_CLB = New_CLB.substr(7);
+		X_T = New_CLB.find("X");
+		Y_T = New_CLB.find("Y");
+		Tieoff_X = atoi((New_CLB.substr(X_T+1,Y_T - X_T-1)).c_str());
 		if(Tieoff_X % 2 == 0){
 			New_TIE = TIEOFF_L.append(New_CLB);
 			std::cout<<"the new tieoff is: "<<New_TIE<<std::endl;
@@ -1456,15 +1463,22 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 
 		}
 		else if( TILE_MAP.find(check4)!=TILE_MAP.end()){	
-		X_T = check4.find("X");
-		Y_T = check4.find("Y");
-		Tieoff_X = atoi((check4.substr(X_T+1,Y_T - X_T-1)).c_str());
+	//	X_T = check4.find("X");
+	//	Y_T = check4.find("Y");
+	//	Tieoff_X = atoi((check4.substr(X_T+1,Y_T - X_T-1)).c_str());
+	//	std::cout<<"The tieoff X: "<<Tieoff_X<<std::endl;
+	//	exit(0);
 		std::cout<<"we should delete: "<<tilename<<std::endl;
 		RoutethroughSharedPtr route = pPips -> getRoutethroughPtr();
 		WireName sourcename = pPips -> getSourceWireName();
 		WireName sinkname = pPips -> getSinkWireName();
 		New_CLB = TILE_MAP.find(check4)->second;
 		New_CLB = New_CLB.substr(7);
+		//std::cout<<New_CLB<<std::endl;
+		//exit(0);	
+		X_T = New_CLB.find("X");
+		Y_T = New_CLB.find("Y");
+		Tieoff_X = atoi((New_CLB.substr(X_T+1,Y_T - X_T-1)).c_str());
 		if(Tieoff_X % 2 == 0){
 			New_TIE = TIEOFF_L.append(New_CLB);
 			std::cout<<"the new tieoff is: "<<New_TIE<<std::endl;
