@@ -20,8 +20,9 @@ Remaining bugs:
 4. In Module Level Router, When I input the X-10,Y-10, the program only executes the first step(X-10) and ignore the second step
 5. MLR just focus on Y-direction and the CLB modification(Not tried DSP & BRAM yet).
 6. MLR X-direction INT wire conflicts errors.
+7. MLB INT wire changing problems.(Can't how to change specific wires,eg.GCLK_L_B6_EAST in INT_L. GCLK_B3_EAST in INT_R)
 
 Now, I can convert my generated XDL to NCD file without error, which just focus on the Y-direction of CLB. As for X-direction, I can change the corresponding tile location in the PIP, however, when it comes to converting XDL to NCD, the error shows: Can't find arc in tile CLBXX with connecting wires XX and XX, which means I should also change the sink and source simultaneously.
 
-10.29 Update:
-Fix the errors regarding different CLB type wire conflicts via altering the wireIndex according to its regularity. Next step is to focus on different INT type wire conflicts.
+11.2 Update:
+Fix the errors regarding different CLB type wire conflicts via altering the wireIndex according to its regularity. Next step is to focus on different INT type wire conflicts, which is in the progress.
