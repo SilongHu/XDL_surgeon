@@ -1435,13 +1435,469 @@ void NetsProcessing(DesignSharedPtr designPtr, const Sites &sites, const Tiles &
 		else{choose = 0;}
 		std::cout<<"choose: "<<choose<<std::endl;	
 		switch(choose){
-			case 0:
+			case 0://other type.
 				{
+				if(tileType_old.compare("INT_R")==0 && tileType_new.compare("INT_L")==0){
+				if (static_cast<int>(sourceindex_old)<=7){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 20;
+				while(add>0){
+				sourceindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				else if (static_cast<int>(sourceindex_old)>=8 && static_cast<int>(sourceindex_old)<=27){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 8;
+				while(add>0){
+				sourceindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=28 && static_cast<int>(sourceindex_old)<=83){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=84 && static_cast<int>(sourceindex_old)<=91){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 20;
+				while(add>0){
+				sourceindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=92 && static_cast<int>(sourceindex_old)<=111){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 8;
+				while(add>0){
+				sourceindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)==112){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=113 && static_cast<int>(sourceindex_old)<=114){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 2;
+				while(add>0){
+				sourceindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=115 && static_cast<int>(sourceindex_old)<=116){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 2;
+				while(add>0){
+				sourceindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=117 && static_cast<int>(sourceindex_old)<=120){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=121 && static_cast<int>(sourceindex_old)<=135){
+				std::cout<<"The index of INT_R moving to INT_L I do not figure out!"<<std::endl;
+				exit(0);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=136 && static_cast<int>(sourceindex_old)<=599){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				else{std::cout<<"can not find sink wire index"<<std::endl;
+					exit(0);}
+				
+				if (static_cast<int>(sinkindex_old)<=7){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 20;
+				while(add>0){
+				sinkindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				else if (static_cast<int>(sinkindex_old)>=8 && static_cast<int>(sinkindex_old)<=27){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 8;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=8 && static_cast<int>(sinkindex_old)<=27){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 8;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=28 && static_cast<int>(sinkindex_old)<=83){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=84 && static_cast<int>(sinkindex_old)<=91){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 20;
+				while(add>0){
+				sinkindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=92 && static_cast<int>(sinkindex_old)<=111){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 8;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)==112){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=113 && static_cast<int>(sinkindex_old)<=114){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 2;
+				while(add>0){
+				sinkindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=115 && static_cast<int>(sinkindex_old)<=116){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 2;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=117 && static_cast<int>(sinkindex_old)<=120){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=121 && static_cast<int>(sinkindex_old)<=135){
+				std::cout<<"The index of INT_R moving to INT_L I do not figure out!"<<std::endl;
+				exit(0);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=136 && static_cast<int>(sinkindex_old)<=599){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				else{std::cout<<"can not find sink wire index"<<std::endl;
+					exit(0);}
+				
 				torc::physical::Pip newpip = Factory::newPip(it->second,sourcename_old,sinkname_old, ePipUnidirectionalBuffered,route);
 				if(netPtr->removePip(*pPips)){}	
 				netPtr->addPip(*(&newpip));
 				AddPIP_SET.insert(it->second);
 				pPips--;
+				}//if(tileType_old.compare("INT_R")==0 && tileType_new.compare("INT_L")==0)
+				
+				else if (tileType_old.compare("INT_L")==0 && tileType_new.compare("INT_R")==0){
+				
+				if (static_cast<int>(sourceindex_old)<=19){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 8;
+				while(add>0){
+				sourceindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=20 && static_cast<int>(sourceindex_old)<=27){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 20;
+				while(add>0){
+				sourceindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=28 && static_cast<int>(sourceindex_old)<=83){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=84 && static_cast<int>(sourceindex_old)<=103){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 8;
+				while(add>0){
+				sourceindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=104 && static_cast<int>(sourceindex_old)<=111){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 20;
+				while(add>0){
+				sourceindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)==112){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=113 && static_cast<int>(sourceindex_old)<=114){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 2;
+				while(add>0){
+				sourceindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=115 && static_cast<int>(sourceindex_old)<=116){
+				WireIndex sourceindex_new = sourceindex_old;
+				int add = 2;
+				while(add>0){
+				sourceindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=117 && static_cast<int>(sourceindex_old)<=120){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=121 && static_cast<int>(sourceindex_old)<=135){
+				std::cout<<"The index of INT_L moving to INT_R I do not figure out!"<<std::endl;
+				exit(0);
+				}
+				
+				else if (static_cast<int>(sourceindex_old)>=136 && static_cast<int>(sourceindex_old)<=599){
+				WireIndex sourceindex_new = sourceindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sourceindex_new);
+				const char* Name = wireinfo.getName();
+				sourcename_new = std::string(Name);
+				}
+				else{std::cout<<"can not find source wire index"<<std::endl;
+					exit(0);}
+				
+				if (static_cast<int>(sinkindex_old)<=19){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 8;
+				while(add>0){
+				sinkindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=20 && static_cast<int>(sinkindex_old)<=27){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 20;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=28 && static_cast<int>(sinkindex_old)<=83){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=84 && static_cast<int>(sinkindex_old)<=103){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 8;
+				while(add>0){
+				sinkindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=104 && static_cast<int>(sinkindex_old)<=111){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 20;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)==112){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=113 && static_cast<int>(sinkindex_old)<=114){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 2;
+				while(add>0){
+				sinkindex_new++;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=115 && static_cast<int>(sinkindex_old)<=116){
+				WireIndex sinkindex_new = sinkindex_old;
+				int add = 2;
+				while(add>0){
+				sinkindex_new--;
+				add--;
+					}
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=117 && static_cast<int>(sinkindex_old)<=120){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=121 && static_cast<int>(sinkindex_old)<=135){
+				std::cout<<"The index of INT_L moving to INT_R I do not figure out!"<<std::endl;
+				exit(0);
+				}
+				
+				else if (static_cast<int>(sinkindex_old)>=136 && static_cast<int>(sinkindex_old)<=599){
+				WireIndex sinkindex_new = sinkindex_old;
+				const WireInfo& wireinfo = tiles.getWireInfo(tileIndex,sinkindex_new);
+				const char* Name = wireinfo.getName();
+				sinkname_new = std::string(Name);
+				}
+				else{std::cout<<"can not find sink wire index"<<std::endl;
+					exit(0);}
+					
+				torc::physical::Pip newpip = Factory::newPip(it->second,sourcename_old,sinkname_old, ePipUnidirectionalBuffered,route);
+				if(netPtr->removePip(*pPips)){}	
+				netPtr->addPip(*(&newpip));
+				AddPIP_SET.insert(it->second);
+				pPips--;		
+				}
+				else{
+				torc::physical::Pip newpip = Factory::newPip(it->second,sourcename_old,sinkname_old, ePipUnidirectionalBuffered,route);
+				if(netPtr->removePip(*pPips)){}	
+				netPtr->addPip(*(&newpip));
+				AddPIP_SET.insert(it->second);
+				pPips--;			
+				}
 				break;
 				}
 			case 1:
